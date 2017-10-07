@@ -6,6 +6,8 @@ public class Constant {
 	
 	public static String USER_PROPERTIES_FILE = "user.properties";
 	
+	public static String SYSTEM_PROPERTIES_FILE = "\\system\\system.properties";
+	
 	public static String COINLIST_PROPERTIES_FILE = "\\system\\coins.properties";
 
 }

@@ -1,5 +1,7 @@
 package com.cmcpredict.automate;
 
+import java.net.URISyntaxException;
+
 import org.quartz.JobBuilder;
 import org.quartz.JobDetail;
 import org.quartz.Scheduler;
@@ -11,7 +13,7 @@ import org.quartz.impl.StdSchedulerFactory;
 
 public class EventScheduler {
 
-	public static void main(String[] args) throws SchedulerException {
+	public static void main(String[] args) throws SchedulerException, URISyntaxException {
 
 		JobDetail job = JobBuilder.newJob(AutomatedTrigger.class).withIdentity("cmcdatacollector", "group1").build();
 

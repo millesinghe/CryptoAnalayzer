@@ -22,8 +22,11 @@ public class Coin {
 		this.usd2lkr = usd2lkr;
 		this.coinID = coinID;
 		
+	}
+
+	public void processWalletValuation() {
 		PropertyHandler prop = new PropertyHandler();
-		this.coinAmount = prop.readUserPropery(coinID + ".amount");
+		this.coinAmount = prop.readSystemPropery(coinID + ".total.amount");
 		System.out.println(coinAmount);
 		CurrencyData c = new CurrencyData();
 		coinInfo = c.getCoinInfo(coinID);
@@ -31,7 +34,7 @@ public class Coin {
 			this.isInvested = true;
 		}
 	}
-
+	
 	public void calculateValue() {
 		if (this.isInvested) {
 			CryptoCalc calc = new CryptoCalc();

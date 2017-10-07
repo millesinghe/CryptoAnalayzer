@@ -1,5 +1,7 @@
 package com.cmcpredict.automate;
 
+import java.net.URISyntaxException;
+
 import org.json.JSONArray;
 
 import com.cmcpredict.helper.ExcelHandler;
@@ -13,7 +15,12 @@ public class AutoDataCollector {
 		CurrencyData data = new CurrencyData();
 		JSONArray jsonArr = data.getCoinInfo("");
 		ExcelHandler excel = new ExcelHandler();
-		excel.writeToExcel(jsonArr);
+		try {
+			excel.writeToExcel(jsonArr);
+		} catch (URISyntaxException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		System.out.println("Finished Exporting coins info");
 		

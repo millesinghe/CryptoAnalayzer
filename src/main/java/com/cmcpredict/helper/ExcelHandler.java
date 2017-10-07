@@ -6,6 +6,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URISyntaxException;
 import java.sql.Timestamp;
 
 import org.apache.poi.ss.usermodel.Cell;
@@ -19,7 +20,7 @@ import com.cmcpredict.util.Constant;
 
 public class ExcelHandler {
 
-	public void writeToExcel(JSONArray data) {
+	public void writeToExcel(JSONArray data) throws URISyntaxException {
 		ClassLoader classLoader = getClass().getClassLoader();
 		File file = new File(classLoader.getResource(Constant.COIN_HISTORY_EXCEL_PATH).getFile());
 
@@ -36,6 +37,11 @@ public class ExcelHandler {
 				// TODO: handle exception
 			}
 		}
+		
+		Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+		String time = timestamp.toString();
+		PropertyHandler pp = new PropertyHandler();
+		pp.writeToSystemPorperty("system/system", "CMC.last.data.updation.excel", time);
 
 		for (int i = 0; i < data.length(); ++i) {
 			String[] list = new String[6];
@@ -59,8 +65,7 @@ public class ExcelHandler {
 				}
 			}
 
-			Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-			list[0] = timestamp.toString();
+			list[0] = time;
 
 			String price = rec.get("price_usd").toString();
 			list[5] = price;

@@ -28,9 +28,6 @@ public class CurrencyData {
 		con.setRequestMethod("GET");
 
 		int responseCode = con.getResponseCode();
-		System.out.println("\nSending 'GET' request to URL : " + url);
-		System.out.println("Response Code : " + responseCode);
-
 		BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
 		String inputLine;
 		StringBuffer response = new StringBuffer();
@@ -41,7 +38,6 @@ public class CurrencyData {
 		in.close();
 
 		// print result
-		System.out.println(response.toString());
 		return response.toString();
 
 	}
@@ -55,7 +51,8 @@ public class CurrencyData {
 			HttpResponse response = httpClient.execute(getRequest);
 
 			if (response.getStatusLine().getStatusCode() != 200) {
-				throw new RuntimeException("Failed : HTTP error code : " + response.getStatusLine().getStatusCode());
+				System.out.println("Failed : HTTP error code : " + response.getStatusLine().getStatusCode());
+				return null;
 			}
 
 			BufferedReader br = new BufferedReader(new InputStreamReader((response.getEntity().getContent())));
@@ -74,8 +71,6 @@ public class CurrencyData {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		System.out.println(jsonResult);
-
 		return jsonResult;
 	}
 
